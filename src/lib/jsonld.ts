@@ -1,6 +1,6 @@
 import type { Graph } from "schema-dts";
 import { siteConfig } from "@/lib/site";
-import { knowsAbout, education, awards } from "@/data";
+import { knowsAbout, education, awards, projects } from "@/data";
 
 export function buildJsonLd(): Graph {
   const { url } = siteConfig;
@@ -56,6 +56,23 @@ export function buildJsonLd(): Graph {
         mainEntity: { "@id": personId },
         dateModified: new Date().toISOString(),
       },
+      {
+        "@type": "ItemList",
+        "@id": `${url}/#projects`,
+        name: `Projects by ${siteConfig.name}`,
+        itemListElement: projects.map((p, i) => ({
+          "@type": "ListItem" as const,
+          position: i + 1,
+          item: {
+            "@type": "CreativeWork" as const,
+            name: p.title,
+            description: p.summary,
+            url: p.links?.live ?? `${url}/#${p.slug}`,
+            keywords: p.stack.join(", "),
+            author: { "@id": personId },
+          },
+        })),
+      },
     ],
   };
-}
+}   
