@@ -1,10 +1,17 @@
+const rawUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const siteConfig = {
   name: "V S Muhammed Naseef",
   shortName: "Naseef",
   jobTitle: "Software Engineer",
+  title: "Muhammed Naseef | Full-Stack Software Engineer, Kerala",
   description:
     "Software engineer from Idukki, Kerala building full-stack web, mobile, GIS and ML-powered applications with React, Next.js, Node.js and Python.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: rawUrl.replace(/\/$/, ""),
   locale: "en_IN",
   location: { locality: "Idukki", region: "Kerala", country: "IN" },
   email: "mnaseef2k02@gmail.com",
@@ -12,6 +19,39 @@ export const siteConfig = {
   links: {
     github: "https://github.com/your-username",
     linkedin: "https://www.linkedin.com/in/your-username",
+  },
+  keywords: [
+    "Muhammed Naseef",
+    "Naseef portfolio",
+    "software engineer Kerala",
+    "full-stack developer Idukki",
+    "Next.js developer India",
+    "React developer Kerala",
+    "Node.js developer",
+    "React Native developer",
+    "GIS developer",
+    "machine learning engineer",
+    "freelance web developer Kerala",
+  ],
+  knowsAbout: [
+    "Full-stack web development",
+    "React",
+    "Next.js",
+    "Node.js",
+    "React Native",
+    "TypeScript",
+    "Python",
+    "PostgreSQL",
+    "MongoDB",
+    "GIS and geospatial web applications",
+    "Machine learning",
+    "Embedded systems and IoT",
+  ],
+  education: {
+    name: "Government Engineering College, Idukki",
+    degree: "B.Tech in Computer Science and Engineering",
+    start: "2022",
+    end: "2026",
   },
 } as const;
 
