@@ -192,9 +192,9 @@ export function Nav() {
                 </li>
               ))}
             </ul>
-            <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
+            {/* <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
               {siteConfig.location.locality}, {siteConfig.location.region}
-            </p>
+            </p> */}
           </motion.div>
         )}
       </AnimatePresence>

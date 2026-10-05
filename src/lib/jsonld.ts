@@ -32,12 +32,12 @@ export function buildJsonLd(): Graph {
         jobTitle: siteConfig.jobTitle,
         description: siteConfig.description,
         email: `mailto:${siteConfig.email}`,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: siteConfig.location.locality,
-          addressRegion: siteConfig.location.region,
-          addressCountry: siteConfig.location.country,
-        },
+        // address: {
+        //   "@type": "PostalAddress",
+        //   addressLocality: siteConfig.location.locality,
+        //   addressRegion: siteConfig.location.region,
+        //   addressCountry: siteConfig.location.country,
+        // },
         alumniOf: education.map((e) => ({
           "@type": "CollegeOrUniversity" as const,
           name: e.institution,

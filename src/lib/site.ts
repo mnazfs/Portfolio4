@@ -8,12 +8,11 @@ export const siteConfig = {
   name: "V S Muhammed Naseef",
   shortName: "Naseef",
   jobTitle: "Software Engineer",
-  title: "Muhammed Naseef | Full-Stack Software Engineer, Kerala",
+  title: "Muhammed Naseef | Full-Stack Software Engineer",
   description:
-    "Software engineer from Idukki, Kerala building full-stack web, mobile, GIS and ML-powered applications with React, Next.js, Node.js and Python.",
+    "Software engineer building full-stack web, mobile, GIS and ML-powered applications with React, Next.js, Node.js and Python.",
   url: rawUrl.replace(/\/$/, ""),
   locale: "en_IN",
-  location: { locality: "Idukki", region: "Kerala", country: "IN" },
   email: "mnaseef2k02@gmail.com",
   // TODO: replace with your real profile URLs (the PDF stripped the hyperlinks)
   links: {
@@ -23,15 +22,15 @@ export const siteConfig = {
   keywords: [
     "Muhammed Naseef",
     "Naseef portfolio",
-    "software engineer Kerala",
-    "full-stack developer Idukki",
-    "Next.js developer India",
-    "React developer Kerala",
+    "software engineer portfolio",
+    "full-stack developer",
+    "Next.js developer",
+    "React developer",
     "Node.js developer",
     "React Native developer",
     "GIS developer",
     "machine learning engineer",
-    "freelance web developer Kerala",
+    "freelance web developer",
   ],
 } as const;
 

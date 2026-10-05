@@ -9,6 +9,9 @@ const socials = [
   { label: "LinkedIn", href: siteConfig.links.linkedin },
 ].filter((s) => !s.href.includes("your-username"));
 
+const labelClass =
+  "text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase";
+
 export function Contact() {
   return (
     <section
@@ -30,15 +33,17 @@ export function Contact() {
               {profile.contact.heading}
             </h3>
           </Reveal>
-          <Reveal as="p" delay={0.1} className="text-paper/70 mt-6 max-w-md text-base leading-relaxed">
+          <Reveal
+            as="p"
+            delay={0.1}
+            className="text-paper/70 mt-6 max-w-md text-base leading-relaxed"
+          >
             {profile.contact.blurb}
           </Reveal>
 
           <Reveal delay={0.2} className="mt-10 space-y-8">
             <div>
-              <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
-                Email
-              </p>
+              <p className={labelClass}>Email</p>
               <a
                 href={`mailto:${profile.contact.email}`}
                 className="link-sweep font-display hover:text-accent mt-2 inline-block text-xl font-bold tracking-tight break-all transition-colors duration-500 md:text-2xl"
@@ -47,18 +52,9 @@ export function Contact() {
               </a>
             </div>
 
-            <div>
-              <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
-                Based in
-              </p>
-              <p className="text-paper/80 mt-2 text-base">{profile.location}, India</p>
-            </div>
-
             {socials.length > 0 && (
               <div>
-                <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
-                  Elsewhere
-                </p>
+                <p className={labelClass}>Elsewhere</p>
                 <ul className="mt-2 flex gap-6">
                   {socials.map((s) => (
                     <li key={s.label}>
@@ -66,7 +62,7 @@ export function Contact() {
                         href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link-sweep text-paper/80 hover:text-accent transition-colors duration-500"
+                        className="link-sweep text-paper/80 hover:text-accent inline-block py-1 transition-colors duration-500"
                       >
                         {s.label} ↗
                       </a>

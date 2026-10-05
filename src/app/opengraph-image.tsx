@@ -73,9 +73,9 @@ export default function OpengraphImage() {
             opacity: 0.6,
           }}
         >
-          <span>
+          {/* <span>
             {siteConfig.location.locality}, {siteConfig.location.region}
-          </span>
+          </span> */}
           <span>{host}</span>
         </div>
       </div>

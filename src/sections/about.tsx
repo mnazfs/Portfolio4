@@ -15,7 +15,6 @@ const range = (start: string, end: string) => (start === end ? start : `${start}
 type TimelineItem = {
   title: string;
   subtitle: string;
-  meta: string;
   dates: string;
   bullets?: readonly string[];
 };
@@ -35,7 +34,12 @@ function Timeline({ items }: { items: readonly TimelineItem[] }) {
   return (
     <ol className="border-paper/15 relative border-l">
       {items.map((item, i) => (
-        <Reveal as="li" key={item.title + item.dates} delay={i * 0.08} className="relative pb-12 pl-8 last:pb-0">
+        <Reveal
+          as="li"
+          key={item.title + item.dates}
+          delay={i * 0.08}
+          className="relative pb-12 pl-8 last:pb-0"
+        >
           <span
             aria-hidden
             className="bg-accent absolute top-2 -left-[4.5px] h-2 w-2 rounded-full"
@@ -47,11 +51,8 @@ function Timeline({ items }: { items: readonly TimelineItem[] }) {
             {item.title}
           </h4>
           <p className="text-paper/70 mt-1 text-base">{item.subtitle}</p>
-          <p className="text-paper/60 mt-1 font-mono text-[10px] tracking-[0.2em] uppercase">
-            {item.meta}
-          </p>
           {item.bullets && (
-            <ul className="text-paper/60 mt-5 max-w-xl list-disc space-y-3 pl-5 text-sm leading-relaxed marker:text-accent">
+            <ul className="text-paper/60 marker:text-accent mt-5 max-w-xl list-disc space-y-3 pl-5 text-sm leading-relaxed">
               {item.bullets.map((b) => (
                 <li key={b}>{b}</li>
               ))}
@@ -76,7 +77,7 @@ function RowList({ rows }: { rows: readonly { title: string; sub: string }[] }) 
           <span className="font-display text-lg font-bold tracking-tight transition-transform duration-500 group-hover:translate-x-2 md:text-xl">
             {r.title}
           </span>
-          <span className="text-paper/50 font-mono text-[10px] tracking-[0.2em] uppercase">
+          <span className="text-paper/60 font-mono text-[10px] tracking-[0.2em] uppercase">
             {r.sub}
           </span>
         </Reveal>
@@ -89,7 +90,6 @@ export function About() {
   const experienceItems: TimelineItem[] = experience.map((e) => ({
     title: e.role,
     subtitle: e.org,
-    meta: e.location,
     dates: range(e.start, e.end),
     bullets: e.bullets,
   }));
@@ -97,7 +97,6 @@ export function About() {
   const educationItems: TimelineItem[] = education.map((e) => ({
     title: e.degree,
     subtitle: e.institution,
-    meta: e.location,
     dates: range(e.start, e.end),
   }));
 
@@ -120,7 +119,12 @@ export function About() {
         </p>
         <div className="max-w-2xl space-y-6">
           {profile.about.paragraphs.map((p, i) => (
-            <Reveal as="p" key={i} delay={i * 0.1} className="text-paper/75 text-lg leading-relaxed">
+            <Reveal
+              as="p"
+              key={i}
+              delay={i * 0.1}
+              className="text-paper/75 text-lg leading-relaxed"
+            >
               {p}
             </Reveal>
           ))}
@@ -129,8 +133,8 @@ export function About() {
 
       <dl className="border-paper/10 mt-20 grid grid-cols-2 gap-8 border-t pt-10 md:grid-cols-4">
         {profile.stats.map((s, i) => (
-          <Reveal key={s.label} delay={i * 0.08}>
-            <dt className="text-paper/50 order-2 mt-2 font-mono text-[10px] tracking-[0.25em] uppercase">
+          <Reveal key={s.label} delay={i * 0.08} className="flex flex-col">
+            <dt className="text-paper/60 order-2 mt-2 font-mono text-[10px] tracking-[0.25em] uppercase">
               {s.label}
             </dt>
             <dd className="font-display text-4xl font-extrabold tracking-tight md:text-6xl">
@@ -155,7 +159,7 @@ export function About() {
         </Block>
         <Block title="Awards & languages">
           <RowList rows={awards.map((a) => ({ title: a.title, sub: a.org }))} />
-          <p className="text-paper/50 mt-8 font-mono text-[11px] tracking-[0.2em] uppercase">
+          <p className="text-paper/60 mt-8 font-mono text-[11px] tracking-[0.2em] uppercase">
             Languages — {languages.join(", ")}
           </p>
         </Block>

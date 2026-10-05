@@ -40,15 +40,15 @@ export function Footer() {
         <span className="sr-only">Email {siteConfig.email}</span>
       </a>
 
-      <div className="border-paper/10 mt-20 grid gap-10 border-t pt-10 sm:grid-cols-2 md:grid-cols-4">
-        <div>
+      <div className="border-paper/10 mt-20 grid gap-10 border-t pt-10 sm:grid-cols-2 md:grid-cols-3">
+        {/* <div>
           <p className={labelClass}>Based in</p>
           <p className="text-paper/80 mt-3 text-sm leading-relaxed">
             {siteConfig.location.locality}, {siteConfig.location.region}
             <br />
             India
           </p>
-        </div>
+        </div> */}
 
         <nav aria-label="Footer">
           <p className={labelClass}>Navigate</p>

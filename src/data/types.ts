@@ -22,7 +22,7 @@ export type Project = {
 export type Experience = {
   role: string;
   org: string;
-  location: string;
+//   location: string;
   start: string;
   end: string;
   bullets: readonly string[];
@@ -30,7 +30,7 @@ export type Experience = {
 
 export type Education = {
   institution: string;
-  location: string;
+//   location: string;
   degree: string;
   start: string;
   end: string;

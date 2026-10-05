@@ -6,10 +6,10 @@ export const profile = {
   name: siteConfig.name,
   shortName: siteConfig.shortName,
   role: siteConfig.jobTitle,
-  location: `${siteConfig.location.locality}, ${siteConfig.location.region}`,
+  //location: `${siteConfig.location.locality}, ${siteConfig.location.region}`,
 
   hero: {
-    eyebrow: "Software Engineer — Idukki, Kerala",
+    eyebrow: "Software Engineer",
     intro:
       "I build full-stack web and mobile products, and I'm just as happy down at the map layer, the machine learning pipeline or the sensor board when the problem calls for it.",
     // Edit freely. Shown as a small status line in the hero.

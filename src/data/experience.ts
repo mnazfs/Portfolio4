@@ -4,7 +4,7 @@ export const experience: readonly Experience[] = [
   {
     role: "Intern",
     org: "District Collectorate, Idukki",
-    location: "Idukki, Kerala",
+    // location: "Idukki, Kerala",
     start: "May 2025",
     end: "May 2025",
     bullets: [
@@ -17,7 +17,7 @@ export const experience: readonly Experience[] = [
 export const education: readonly Education[] = [
   {
     institution: "Government Engineering College, Idukki",
-    location: "Idukki, Kerala",
+    // location: "Idukki, Kerala",
     degree: "B.Tech in Computer Science & Engineering",
     start: "2022",
     end: "2026",
