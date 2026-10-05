@@ -1,5 +1,6 @@
 import type { Graph } from "schema-dts";
 import { siteConfig } from "@/lib/site";
+import { knowsAbout, education, awards } from "@/data";
 
 export function buildJsonLd(): Graph {
   const { url } = siteConfig;
@@ -37,11 +38,12 @@ export function buildJsonLd(): Graph {
           addressRegion: siteConfig.location.region,
           addressCountry: siteConfig.location.country,
         },
-        alumniOf: {
-          "@type": "CollegeOrUniversity",
-          name: siteConfig.education.name,
-        },
-        knowsAbout: [...siteConfig.knowsAbout],
+        alumniOf: education.map((e) => ({
+          "@type": "CollegeOrUniversity" as const,
+          name: e.institution,
+        })),
+        award: awards.map((a) => `${a.title}, ${a.org}`),
+        knowsAbout: [...knowsAbout],
         ...(sameAs.length > 0 ? { sameAs } : {}),
       },
       {

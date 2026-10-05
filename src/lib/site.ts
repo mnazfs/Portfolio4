@@ -33,26 +33,6 @@ export const siteConfig = {
     "machine learning engineer",
     "freelance web developer Kerala",
   ],
-  knowsAbout: [
-    "Full-stack web development",
-    "React",
-    "Next.js",
-    "Node.js",
-    "React Native",
-    "TypeScript",
-    "Python",
-    "PostgreSQL",
-    "MongoDB",
-    "GIS and geospatial web applications",
-    "Machine learning",
-    "Embedded systems and IoT",
-  ],
-  education: {
-    name: "Government Engineering College, Idukki",
-    degree: "B.Tech in Computer Science and Engineering",
-    start: "2022",
-    end: "2026",
-  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;
