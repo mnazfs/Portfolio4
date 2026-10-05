@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export function Marquee({ items, className }: { items: string[]; className?: string }) {
+export function Marquee({ items, className }: { items: readonly string[]; className?: string }) {
   const row = (hidden: boolean) => (
     <div className="flex w-max items-center" aria-hidden={hidden || undefined}>
       {items.map((item) => (
