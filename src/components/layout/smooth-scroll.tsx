@@ -3,8 +3,15 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+function focusTarget(el: HTMLElement) {
+  if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
+}
+
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // With reduced motion we skip Lenis entirely and let the browser handle anchors
+    // natively, including focus.
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
 
@@ -27,6 +34,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       e.preventDefault();
       lenis.scrollTo(el);
       history.replaceState(null, "", id);
+      // Deferred so it still works when the mobile menu has just closed and
+      // React is removing `inert` from the page content.
+      setTimeout(() => focusTarget(el), 50);
     };
     document.addEventListener("click", onClick);
 

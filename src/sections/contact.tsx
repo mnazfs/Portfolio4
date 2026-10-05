@@ -36,7 +36,7 @@ export function Contact() {
 
           <Reveal delay={0.2} className="mt-10 space-y-8">
             <div>
-              <p className="text-paper/40 font-mono text-[10px] tracking-[0.25em] uppercase">
+              <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
                 Email
               </p>
               <a
@@ -48,7 +48,7 @@ export function Contact() {
             </div>
 
             <div>
-              <p className="text-paper/40 font-mono text-[10px] tracking-[0.25em] uppercase">
+              <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
                 Based in
               </p>
               <p className="text-paper/80 mt-2 text-base">{profile.location}, India</p>
@@ -56,7 +56,7 @@ export function Contact() {
 
             {socials.length > 0 && (
               <div>
-                <p className="text-paper/40 font-mono text-[10px] tracking-[0.25em] uppercase">
+                <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
                   Elsewhere
                 </p>
                 <ul className="mt-2 flex gap-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { EASE_IN_OUT_EXPO, EASE_OUT_EXPO } from "@/lib/motion";
 import { siteConfig } from "@/lib/site";
@@ -16,6 +16,8 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState("");
   const [active, setActive] = useState("");
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   // Live clock (client-only, avoids hydration mismatch)
   useEffect(() => {
@@ -51,21 +53,45 @@ export function Nav() {
     return () => observer.disconnect();
   }, []);
 
-  // Lock scroll while the mobile menu is open
+  // Menu open: lock scroll, make the page inert, move focus into the menu.
   useEffect(() => {
-    document.documentElement.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const behind = document.querySelectorAll<HTMLElement>("#main, #site-footer");
+    behind.forEach((el) => el.setAttribute("inert", ""));
+    document.documentElement.style.overflow = "hidden";
+
+    const raf = requestAnimationFrame(() => {
+      menuRef.current?.querySelector<HTMLElement>("a")?.focus();
+    });
+
     return () => {
+      cancelAnimationFrame(raf);
+      behind.forEach((el) => el.removeAttribute("inert"));
       document.documentElement.style.overflow = "";
     };
   }, [open]);
 
-  // Close on Escape
+  // Escape closes the menu and returns focus to the toggle.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  // Close if the viewport grows past the mobile breakpoint.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   return (
     <>
@@ -77,13 +103,12 @@ export function Nav() {
       >
         <nav
           aria-label="Primary"
-          className="flex items-center justify-between px-6 py-5 md:px-10"
+          className="flex items-center justify-between px-6 py-4 md:px-10 md:py-5"
         >
           <a
             href="#top"
-            data-hover
             onClick={() => setOpen(false)}
-            className="font-display text-lg font-extrabold tracking-tight"
+            className="font-display inline-block py-1 text-lg font-extrabold tracking-tight"
             aria-label={`${siteConfig.name} — back to top`}
           >
             {siteConfig.shortName}
@@ -95,9 +120,8 @@ export function Nav() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  data-hover
                   aria-current={active === l.href.slice(1) ? "location" : undefined}
-                  className="link-sweep aria-[current=location]:opacity-100 opacity-70 transition-opacity"
+                  className="link-sweep inline-block py-1 opacity-70 transition-opacity aria-[current=location]:opacity-100"
                 >
                   {l.label}
                 </a>
@@ -105,18 +129,21 @@ export function Nav() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-6">
-            <span className="font-mono text-[11px] tracking-[0.25em] uppercase" aria-hidden>
+          <div className="flex items-center gap-4 md:gap-6">
+            <span
+              className="font-mono text-[11px] tracking-[0.25em] uppercase"
+              aria-hidden
+            >
               <span className="hidden sm:inline">IST </span>
               {time}
             </span>
             <button
-              data-hover
+              ref={toggleRef}
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="relative flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden"
+              className="relative -mr-2 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
             >
               <span
                 className={`block h-px w-6 bg-current transition-transform duration-300 ${
@@ -136,7 +163,9 @@ export function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={menuRef}
             id="mobile-menu"
+            data-lenis-prevent
             className="bg-ink fixed inset-0 z-[140] flex flex-col justify-between px-6 pt-28 pb-10 md:hidden"
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
@@ -163,7 +192,7 @@ export function Nav() {
                 </li>
               ))}
             </ul>
-            <p className="text-paper/50 font-mono text-[10px] tracking-[0.25em] uppercase">
+            <p className="text-paper/60 font-mono text-[10px] tracking-[0.25em] uppercase">
               {siteConfig.location.locality}, {siteConfig.location.region}
             </p>
           </motion.div>

@@ -23,12 +23,12 @@ export function Hero() {
         <span aria-hidden className="block">
           <SplitText
             text={FIRST}
-            className="pr-[1vw] text-[12.5vw] uppercase md:text-[13vw]"
+            className="pr-[1vw] text-[7.5vw] uppercase md:text-[8vw]"
             delay={0.2}
           />
           <SplitText
             text={LAST}
-            className="text-accent text-[12.5vw] uppercase md:text-[13vw]"
+            className="text-accent text-[7.5vw] uppercase md:text-[8vw]"
             delay={0.55}
           />
         </span>

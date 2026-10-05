@@ -47,7 +47,7 @@ function Timeline({ items }: { items: readonly TimelineItem[] }) {
             {item.title}
           </h4>
           <p className="text-paper/70 mt-1 text-base">{item.subtitle}</p>
-          <p className="text-paper/40 mt-1 font-mono text-[10px] tracking-[0.2em] uppercase">
+          <p className="text-paper/60 mt-1 font-mono text-[10px] tracking-[0.2em] uppercase">
             {item.meta}
           </p>
           {item.bullets && (

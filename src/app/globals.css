@@ -139,3 +139,15 @@ html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Programmatic focus on anchor targets (skip link, nav jumps) shouldn't draw a ring on a whole section */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* Balanced line breaks on headings avoid orphaned single words on mobile */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}

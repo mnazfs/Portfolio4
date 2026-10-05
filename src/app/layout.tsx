@@ -4,8 +4,10 @@ import { fontDisplay, fontSans, fontMono } from "@/lib/fonts";
 import { siteConfig } from "@/lib/site";
 import { buildJsonLd } from "@/lib/jsonld";
 import { cn } from "@/lib/utils";
+import { MotionProvider } from "@/components/layout/motion-provider";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { Nav } from "@/components/layout/nav";
+import { Footer } from "@/components/layout/footer";
 import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
@@ -62,6 +64,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// With JavaScript off, motion's inline "hidden" start states never resolve.
+// This makes everything visible so the page is fully readable without JS.
+const noScriptCss = `[style*="opacity:0"],[style*="opacity: 0"],[style*="translateY(110%)"]{opacity:1!important;transform:none!important}`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -69,6 +75,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={cn(fontDisplay.variable, fontSans.variable, fontMono.variable)}
     >
       <body className="grain relative min-h-screen">
+        <noscript>
+          <style>{noScriptCss}</style>
+        </noscript>
         <a
           href="#main"
           className="bg-accent text-ink fixed top-3 left-3 z-[400] -translate-y-20 px-4 py-2 font-mono text-xs uppercase focus:translate-y-0"
@@ -76,10 +85,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <JsonLd data={buildJsonLd()} />
-        <SmoothScroll>
-          <Nav />
-          {children}
-        </SmoothScroll>
+        <MotionProvider>
+          <SmoothScroll>
+            <Nav />
+            {children}
+            <Footer />
+          </SmoothScroll>
+        </MotionProvider>
       </body>
     </html>
   );
